@@ -8,9 +8,10 @@ let data =[{ "name": "Arjun Tripathi", "course": "MCA", "roll_no": "14", "id": 1
 { "name": "Rahul Durgapal", "course": "MCA", "roll_no": "36", "id": 2 },
 { "name": "Aman Yadav", "course": "MCA", "roll_no": "08", "id": 3}];
 
+// Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
 
-// Middleware to parse JSON bodies
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -83,8 +84,8 @@ app.patch("/:id", function (req, res) {
     let found = data.find(function (item) {
         return item.id === parseInt(req.params.id);
     });
+
     if (found) {
-        
         if (req.body.name) {
             found.name = req.body.name;
         }
@@ -95,7 +96,7 @@ app.patch("/:id", function (req, res) {
             found.roll_no = req.body.roll_no;
         }
         res.status(201).json({ "message": "data updated" });
-    } else {
+    }else{
         res.status(404).json({
             'message': 'unable to insert data because data inserted not matched'
         });
